@@ -4,7 +4,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import { carregarGastos, salvarGastos } from '../storage';
 
 function formatarValor(valor) {
-  return 'R$ ' + valor.toFixed(2).replace('.', ',');
+  const [inteiro, centavos] = valor.toFixed(2).split('.');
+  return 'R$ ' + inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + centavos;
 }
 
 export default function ListaGastos({ navigation }) {
